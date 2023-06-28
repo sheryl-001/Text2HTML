@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheryl's Text to HTML Converter'</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    {% load static %}<link rel="shortcut icon" href="{% static "HtmlEditor/media/myLogo.png" %}" type="HtmlEditor/media/x-icon">
+
+</head>
+<style>
+    #cke_id_body {
+        width: inherit !important;
+    }
+
+    .htmleditor p {
+        font-weight: 900;
+        font-size: 20px;
+    }
+
+    .texteditor p label {
+        font-weight: 800;
+        font-size: 18px;
+    }
+
+    #htmldata {
+        font-weight: 600;
+    }
+
+    nav {
+        height: 100px;
+    }
+
+    .color-me {
+        width: 100%;
+        text-align: center;
+        color: rebeccapurple;
+        font-size: 28px;
+        font-weight: bold;
+        font-family: verdana;
+    }
+    input[type=submit] {
+        background-color: mediumvioletred;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        font-family: verdana;
+    }
+</style>
+<body>
+
+    <!-- ----------------------Navbar start -------------------- -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <a class="navbar-brand" href="#">
+            {% load static %}<img src="{% static "HtmlEditor/media/myLogo.png" %}" width="150" height="80" class="d-inline-block align-top" alt="" />
+        </a>
+        <a class="color-me" href="/">TEXT ====> HTML</a>
+    </nav>
+
+    <!-- ---------------------------Navbar Ends---------------------------- -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="texteditor">
+                    {{form.media}}
+                    {{form.as_p}}
+                </div>
+                <input type="submit" class="btn btn-info" onclick="get_html_code()">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="htmleditor">
+                    <p>HTML CODE</p>
+                    <div class="form-group">
+                        <textarea class="form-control " rows="16" id='htmldata'>
+                    </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    function get_html_code() {
+        var x = CKEDITOR.instances['id_body'].getData();
+        var y = document.getElementById('htmldata');
+        y.innerHTML = x;
+    }
+</script>
